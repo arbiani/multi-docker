@@ -13,8 +13,10 @@ after_success:
   - docker build -t arbiani/multi-nginx ./nginx
   - docker build -t arbiani/multi-server ./server
   - docker build -t arbiani/multi-worker ./worker
+
   # Log in to the docker CLI
   echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  
   # Take those images to docker hub.
   - docker push arbiani/multi-client
   - docker push arbiani/multi-nginx

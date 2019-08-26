@@ -1,0 +1,20 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t arbiani/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run arbiani/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t arbiani/multi-client ./client
+  - docker build -t arbiani/multi-nginx ./nginx
+  - docker build -t arbiani/multi-server ./server
+  - docker build -t arbiani/multi-worker ./worker
+  # Log in to the docker CLI
+
+
+
+  # Take those images to docker hub.
